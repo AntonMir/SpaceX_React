@@ -50,6 +50,7 @@ class App extends React.Component {   // наследуем все методы 
     rocket: 'Falcon 1',
     rocketFeatures: null,
     rockets: [],
+    company: null,
   };
 
   componentDidMount() {   // метод жизненного цикла, вызывается до рендера
@@ -65,7 +66,9 @@ class App extends React.Component {   // наследуем все методы 
         return data
       })
       .then(data => data.find(item => item.name === this.state.rocket))
-      .then(rocketFeatures => this.setState({ rocketFeatures }))
+      .then(rocketFeatures => {
+        this.setState({ rocketFeatures })
+      });
   }
   
   changeRocket = rocket => {
@@ -74,13 +77,18 @@ class App extends React.Component {   // наследуем все методы 
     }, this.updateRocket)
   }
 
+  updateCompany = () => {
+    this.fetchData.getCompany()
+    .then(data => this.setState({company: data}))
+  }
+
   render() {
     console.log(this.state);
     return (
       <>
         <Header rockets={ this.state.rockets } changeRocket={this.changeRocket} />   
         <Main rocket={this.state.rocket}/>    { /* передаем сюда значение из state */}
-        <Features />
+        {this.state.rocketFeatures && <Features {...this.state.rocketFeatures}/>}
         <Footer />
       </>
     )
