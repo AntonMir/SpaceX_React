@@ -1,17 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from 'react';      // точка входа в библиотеку реакт
+import ReactDOM from 'react-dom';     // подключается только в index.js он нужен для работы с DOM
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+import App from './App';  // он вставлен ниже в <App />
+
+
+ReactDOM.render(         // запускает наш js код после загрузки страницы
+  <React.StrictMode>  {/* работает как 'use strict' */}
+    <App />   {/* само приложение из App.js */}
+  </React.StrictMode>,    /* работает как 'use strict' */
+  document.getElementById('root'),
+  () => {
+    // тут наш js код
+    // console.log('Hello');
+  }
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
